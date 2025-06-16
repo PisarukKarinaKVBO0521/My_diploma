@@ -2,16 +2,13 @@
 import cv2
 import os
 #create video path for input and output
-video_path = os.path.join('.data', 'Video3.mp4')
-video_out_path = os.path.join('.out', 'Video3resultsdetect.mp4')
+video_path = os.path.join('.data', 'Video5.mp4')
+video_out_path = os.path.join('.out', 'Video5resultsdetect.mp4')
 #create input object
 cap = cv2.VideoCapture(video_path)
 ret, frame = cap.read()
 print(frame.shape)
 #create result video
-
-cap_out = cv2.VideoWriter(video_out_path, cv2.VideoWriter_fourcc(*'MP4V'), cap.get(cv2.CAP_PROP_FPS),
-                          (frame.shape[1], frame.shape[0]))
 #show intup video
 # Проверяем корректность открытия исходного видео
 if not cap.isOpened():
@@ -24,7 +21,7 @@ frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 # Создать объект VideoWriter для записи видео в формате .mp4
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter(video_out_path, fourcc, 20.0, (frame_width, frame_height))
+cap_out = cv2.VideoWriter(video_out_path, fourcc, 20.0, (frame_width, frame_height))
 
 # Указать путь к видеофайлу
 backSub = cv2.createBackgroundSubtractorMOG2()
@@ -70,14 +67,14 @@ while True:
     # Отобразить кадр
     cv2.imshow('Видео', frame_out)
 
-    out.write(frame_out)
+    cap_out.write(frame_out)
 
     # ret, frame = cap.read()
-
-    # Выход из цикла при нажатии клавиши 'e'
-    if cv2.waitKey(25) & 0xFF == ord('e'):
+    # Выход из цикла при нажатии клавиши 'q'
+    if cv2.waitKey(25) & 0xFF == ord('q'):
         break
 
 # Освободить захват видео и закрыть все окна
 cap.release()
+cap_out.release()
 cv2.destroyAllWindows()
