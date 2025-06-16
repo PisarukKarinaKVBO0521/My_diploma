@@ -2,8 +2,8 @@
 import cv2
 import os
 #create video path for input and output
-video_path = os.path.join('.data', 'Video3.mp4')
-video_out_path = os.path.join('.out', 'Video3resultsdetect.mp4')
+video_path = os.path.join('data', 'Video3.mp4')
+video_out_path = os.path.join('out', 'Video3resultsdetect.mp4')
 #create input object
 cap = cv2.VideoCapture(video_path)
 ret, frame = cap.read()
